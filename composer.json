@@ -1,0 +1,25 @@
+{
+    "name": "hao/mq",
+    "homepage": "https://github.com/JZhao1020/mq",
+    "description": "rabbit mq",
+    "type": "library",
+    "authors": [
+        {
+            "name": "JZ浩",
+            "email": "18816784184@163.com"
+        }
+    ],
+    "keywords": [
+        "MQ"
+    ],
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "limiting\\": "src"
+        }
+    },
+    "require": {
+        "php": ">=7.0",
+        "php-amqplib/php-amqplib": ">=2.6.1"
+    }
+}
