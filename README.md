@@ -42,6 +42,7 @@ $callback = function ($msg) {
 /**
  * 消费已经超时的订单信息，进行处理
  */
+$delay->setQos(1);
 $delay->consumeMessage($delayQueueName, $callback);
 ```
 
@@ -76,6 +77,7 @@ $callback = function ($msg) {
 /**
  * 消费已经超时的订单信息，进行处理
  */
+$delay->setQos(1);
 $delay->consumeMessage($delayQueueName, $callback);
   
 ```

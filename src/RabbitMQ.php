@@ -96,6 +96,14 @@ class RabbitMQ
         $this->channel->basic_publish($data, $exchange, $routeKey);
     }
 
+    /*
+     * 设置消费者预取消息数量
+     * @param string|int $count 预取消息数量
+     */
+    public function setQos($count = 1){
+        $this->channel->basic_qos(null, $count, null);
+    }
+
     /**
      * 消费消息
      * @param $queueName
