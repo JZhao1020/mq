@@ -11,11 +11,20 @@ use PhpAmqpLib\Wire\AMQPTable;
 class RabbitMQ
 {
     public $config = [
-        'host' => '127.0.0.1', //ip
-        'port' => 5672,      //端口号
-        'user' => 'guest',     //用户
-        'password' => 'guest', //密码
-        'vhost' => '/'         //虚拟host
+        'host'               => '127.0.0.1',    //ip
+        'port'               => 5672,           //端口号
+        'user'               => 'guest',        //用户
+        'password'           => 'guest',        //密码
+        'vhost'              => '/',            //虚拟host
+        'insist'             => false,
+        'login_method'       => 'AMQPLAIN',
+        'login_response'     => null,
+        'locale'             => 'en_US',
+        'connection_timeout' => 60,
+        'read_write_timeout' => 60,
+        'context'            => null,
+        'keepalive'          => true,
+        'heartbeat'          => 30
     ];
 
     protected $connection;
@@ -28,8 +37,37 @@ class RabbitMQ
     public function __construct($config = [])
     {
         if($config) $this->setConfig($config);
-        $this->connection = new AMQPStreamConnection($this->config['host'], $this->config['port'], $this->config['user'], $this->config['password'], $this->config['vhost']);
-        $this->channel    = $this->connection->channel();
+        $host               = $this->config['host'];
+        $port               = $this->config['port'];
+        $user               = $this->config['user'];
+        $password           = $this->config['password'];
+        $vhost              = $this->config['vhost'];
+        $insist             = $this->config['insist'];
+        $login_method       = $this->config['login_method'];
+        $login_response     = $this->config['login_response'];
+        $locale             = $this->config['locale'];
+        $connection_timeout = $this->config['connection_timeout'];
+        $read_write_timeout = $this->config['read_write_timeout'];
+        $context            = $this->config['context'];
+        $keepalive          = $this->config['keepalive'];
+        $heartbeat          = $this->config['heartbeat'];
+        $this->connection   = new AMQPStreamConnection(
+            $host,
+            $port,
+            $user,
+            $password,
+            $vhost,
+            $insist,
+            $login_method,
+            $login_response,
+            $locale,
+            $connection_timeout,
+            $read_write_timeout,
+            $context,
+            $keepalive,
+            $heartbeat
+        );
+        $this->channel      = $this->connection->channel();
     }
 
     //重新设置MQ的链接配置
